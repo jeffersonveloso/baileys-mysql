@@ -1,8 +1,8 @@
 # Baileys com MYSQL
 
-### Este é um exemplo inicial de como usar o projeto Baileys e armazenar as chaves de autenticação no banco de dados MYSQL.
-
 ### Este é um fork do projeto **Baileys PostgreSQL** desenvolvido por [Ericky Thierry](https://github.com/erickythierry/baileys-postgresql), que oferece uma implementação do protocolo Baileys para conexão com um banco de dados MySQL.
+
+### Este é um exemplo inicial de como usar o projeto Baileys e armazenar as chaves de autenticação no banco de dados MYSQL.
 
 ## Como usar:
 
