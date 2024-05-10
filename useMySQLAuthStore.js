@@ -101,14 +101,14 @@ const fixFileName = (file) => {
 async function insertOrUpdateAuthKey(botId, keyId, keyJson) {
     const db = await getDbConnection();
 
-    const selectQuery = `SELECT id FROM auth_keys WHERE bot_id = ? AND key_id = ?`;
+    const selectQuery = `SELECT id FROM auth_keys WHERE session_id = ? AND key_id = ?`;
     const [rows] = await db.execute(selectQuery, [botId, keyId]);
 
     if (rows.length > 0) {
         const updateQuery = `UPDATE auth_keys SET key_json = ?, updated_at = NOW() WHERE id = ?`;
         await db.execute(updateQuery, [keyJson, rows[0].id]);
     } else {
-        const insertQuery = `INSERT INTO auth_keys (bot_id, key_id, key_json) VALUES (?, ?, ?)`;
+        const insertQuery = `INSERT INTO auth_keys (session_id, key_id, key_json) VALUES (?, ?, ?)`;
         await db.execute(insertQuery, [botId, keyId, keyJson]);
     }
 }
@@ -116,7 +116,7 @@ async function insertOrUpdateAuthKey(botId, keyId, keyJson) {
 async function getAuthKey(botId, keyId) {
     const db = await getDbConnection();
 
-    const query = `SELECT key_json FROM auth_keys WHERE bot_id = ? AND key_id = ?`;
+    const query = `SELECT key_json FROM auth_keys WHERE session_id = ? AND key_id = ?`;
     const [rows] = await db.execute(query, [botId, keyId]);
 
     return rows.length > 0 ? rows[0].key_json : null;
@@ -125,6 +125,6 @@ async function getAuthKey(botId, keyId) {
 async function deleteAuthKey(botId, keyId) {
     const db = await getDbConnection();
 
-    const query = `DELETE FROM auth_keys WHERE bot_id = ? AND key_id = ?`;
+    const query = `DELETE FROM auth_keys WHERE session_id = ? AND key_id = ?`;
     await db.execute(query, [botId, keyId]);
 }
