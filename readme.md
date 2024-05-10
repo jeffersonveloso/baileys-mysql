@@ -1,12 +1,12 @@
-# Baileys com PostgreSQL
+# Baileys com MYSQL
 
-### Este é um exemplo inicial de como usar o projeto Baileys e armazenar as chaves de autenticação no banco de dados PostgreSQL.
+### Este é um exemplo inicial de como usar o projeto Baileys e armazenar as chaves de autenticação no banco de dados MYSQL.
 
 ## Como usar:
 
-1. Crie uma instância do PostgreSQL com o banco de dados `bots`.
+1. Crie uma instância do MYSQL com o banco de dados `bots`.
 2. Clone este repositório e instale as dependências com `npm install`.
-3. Copie o arquivo `exemplo.config.js` para `config.js` e preencha os dados do seu banco PostgreSQL.
+3. Copie o arquivo `exemplo.config.js` para `config.js` e preencha os dados do seu banco MYSQL.
 4. Na linha 20 do arquivo `index.js`, você pode escolher o nome do bot que será salvo no banco de dados na coluna `bot_id`.
 5. Por fim, execute o projeto com `npm start` . O QR code do bot aparecerá no console. Escaneie-o com seu WhatsApp.
 6. Pronto! O bot foi criado e as chaves de autenticação estão sendo salvas no banco de dados (muito melhor do que armazená-las em arquivos JSON localmente).
