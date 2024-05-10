@@ -13,6 +13,6 @@
   "dependencies": {
     "@adiwajshing/keyed-db": "^0.2.4",
     "@whiskeysockets/baileys": "^6.0.0",
-    "mysql2": "^5.2.2"
+    "mysql2": "^8.3.0"
   }
 }
