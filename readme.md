@@ -10,7 +10,7 @@
 2. Clone este repositório e instale as dependências com `npm install`.
 3. Edite o arquivo `config.js` e preencha os dados do seu banco MYSQL.
 4. Na linha 20 do arquivo `index.js`, você pode escolher o nome da sessão que será salvo no banco de dados na coluna `session_id`.
-5. Por fim, dentro da pasta do projeto, execute o projeto com `npm start index.js --name Baileys-MySQL` . O QR code da sessão aparecerá no console. Escaneie-o com seu WhatsApp.
+5. Por fim, dentro da pasta do projeto, execute o projeto com `pm2 start index.js --name Baileys-MySQL` . O QR code da sessão aparecerá no console. Escaneie-o com seu WhatsApp.
 6. Pronto! O bot foi criado e as chaves de autenticação estão sendo salvas no banco de dados (muito melhor do que armazená-las em arquivos JSON localmente).
 - As auth keys estarão na tabela `auth_keys` com as colunas: `id, session_id, key_id, key_json, created_at` e `updated_at`
 
