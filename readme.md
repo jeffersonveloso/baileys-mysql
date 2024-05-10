@@ -15,8 +15,8 @@
 ## Dicas:
 
 - O `index.js` é apenas o exemplo inicial do projeto Baileys. Sinta-se à vontade para modificá-lo.
-- O `usePostgresAuthStore.js` já está preparado para usar múltiplos bots no mesmo script, bastando passar um nome diferente para cada um.
-- O `usePostgresAuthStore.js` utiliza a mesma estrutura da função `useMultiFileAuthState` do Baileys, trocando apenas o salvamento em arquivos JSON para salvar em registros numa tabela.
+- O `useMySQLAuthStore.js` já está preparado para usar múltiplos bots no mesmo script, bastando passar um nome diferente para cada um.
+- O `useMySQLAuthStore.js` utiliza a mesma estrutura da função `useMultiFileAuthState` do Baileys, trocando apenas o salvamento em arquivos JSON para salvar em registros numa tabela.
 - O `db.js` já cria a tabela caso ela não exista no Banco.
 - O `db.js` já está preparado para reaproveitar a mesma conexão com o banco de dados e assim evitar múltiplas conexões e sobrecarregar o banco.
 - O `logs.js` é uma instância do Pino para exibir os logs do Baileys de maneira mais legível no console.
