@@ -1,6 +1,6 @@
 # Baileys com MYSQL
 
-### Esta é um adaptação do projeto **Baileys PostgreSQL** desenvolvido por [Ericky Thierry](https://github.com/erickythierry/baileys-postgresql), que oferece uma implementação do protocolo Baileys para conexão com um banco de dados.
+### Esta é um adaptação do projeto **Baileys PostgreSQL** desenvolvido por [Ericky Thierry](https://github.com/erickythierry/baileys-postgresql), que oferece uma implementação do protocolo Baileys para conexão com um banco de dados PostgreSQL.
 
 ### Este é um exemplo inicial de como usar o projeto Baileys e armazenar as chaves de autenticação no banco de dados MYSQL.
 
