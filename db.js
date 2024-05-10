@@ -1,13 +1,11 @@
-import pg from 'pg';
-const { Pool } = pg;
+import mysql from 'mysql2/promise'; // Importa o pacote mysql2
+import config from './config.js';
 
-import config from "./config.js"
+// Configurações de conexão com o banco de dados MySQL
+const dbConfig = config;
 
-// Configurações de conexão com o banco de dados
-const dbConfig = config
-
-// Cria um pool de conexões com o banco de dados
-const pool = new Pool(dbConfig);
+// Cria uma pool de conexões com o banco de dados MySQL
+const pool = mysql.createPool(dbConfig);
 
 // Variável global para armazenar a conexão e checar se a tabela auth_keys já foi criada
 let dbConnection = null;
@@ -19,41 +17,42 @@ async function getDbConnection() {
         return dbConnection;
     }
 
-    console.log('Criando nova conexão com o banco de dados');
-    dbConnection = await pool.connect();
+    console.log('Criando nova conexão com o banco de dados MySQL');
+    dbConnection = await pool.getConnection();
 
     // Checa se a tabela auth_keys já foi criada
     if (!authKeysTableCreated) {
-        const query = `SELECT EXISTS (
-        SELECT 1
-        FROM information_schema.tables
-        WHERE table_name = 'auth_keys'
-      )`;
-        const { rows } = await dbConnection.query(query);
-        const authKeysTableExists = rows[0].exists;
+        try {
+            console.log('❗Checando se a tabela auth_keys já existe...');
+            const [rows] = await dbConnection.execute(
+                `SELECT EXISTS (
+                    SELECT 1
+                    FROM information_schema.tables
+                    WHERE table_name = 'auth_keys'
+                ) AS tableExists`
+            );
 
-        // tabela é criada caso nao exista
-        if (!authKeysTableExists) {
-            console.log('❗Criando tabela auth_keys');
-            const createTableQuery = `
-          CREATE TABLE auth_keys (
-            id serial NOT NULL,
-            bot_id VARCHAR(255),
-            key_id VARCHAR(255),
-            key_json TEXT,
-            CONSTRAINT auth_keys_pk PRIMARY KEY (id)
-          ) WITH (
-            OIDS=FALSE
-          );
-          ALTER TABLE auth_keys
-          ADD COLUMN created_at TIMESTAMP DEFAULT NOW(),
-          ADD COLUMN updated_at TIMESTAMP DEFAULT NOW();
-        `;
-            await dbConnection.query(createTableQuery);
-            console.log('Tabela auth_keys criada com sucesso');
+            const { tableExists } = rows[0];
+            // Tabela é criada caso não exista
+            if (!tableExists) {
+                console.log('❗Criando tabela auth_keys');
+                await dbConnection.execute(`
+                    CREATE TABLE auth_keys (
+                        id INT AUTO_INCREMENT PRIMARY KEY,
+                        bot_id VARCHAR(255),
+                        key_id VARCHAR(255),
+                        key_json TEXT,
+                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+                    )
+                `);
+                console.log('✅ Tabela auth_keys criada com sucesso');
+            }
+
+            authKeysTableCreated = true;
+        } catch (error) {
+            console.error('Erro ao criar a tabela auth_keys:', error);
         }
-
-        authKeysTableCreated = true;
     }
 
     return dbConnection;
