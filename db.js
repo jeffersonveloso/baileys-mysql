@@ -39,7 +39,7 @@ async function getDbConnection() {
                 await dbConnection.execute(`
                     CREATE TABLE auth_keys (
                         id INT AUTO_INCREMENT PRIMARY KEY,
-                        bot_id VARCHAR(255),
+                        session_id VARCHAR(255),
                         key_id VARCHAR(255),
                         key_json TEXT,
                         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
