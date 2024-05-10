@@ -4,13 +4,13 @@
 
 ## Como usar:
 
-1. Crie uma instância do MYSQL com o banco de dados `bots`.
+1. Crie uma instância do MYSQL com o banco de dados `sessions`.
 2. Clone este repositório e instale as dependências com `npm install`.
 3. Copie o arquivo `exemplo.config.js` para `config.js` e preencha os dados do seu banco MYSQL.
-4. Na linha 20 do arquivo `index.js`, você pode escolher o nome do bot que será salvo no banco de dados na coluna `bot_id`.
+4. Na linha 20 do arquivo `index.js`, você pode escolher o nome do bot que será salvo no banco de dados na coluna `session_id`.
 5. Por fim, execute o projeto com `npm start` . O QR code do bot aparecerá no console. Escaneie-o com seu WhatsApp.
 6. Pronto! O bot foi criado e as chaves de autenticação estão sendo salvas no banco de dados (muito melhor do que armazená-las em arquivos JSON localmente).
-- As auth keys estarão na tabela `auth_keys` com as colunas: `id, bot_id, key_id, key_json, created_at` e `updated_at`
+- As auth keys estarão na tabela `auth_keys` com as colunas: `id, session_id, key_id, key_json, created_at` e `updated_at`
 
 ## Dicas:
 
